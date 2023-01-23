@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngjokaj <ngjokaj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emetaj <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 09:46:22 by ngjokaj           #+#    #+#             */
-/*   Updated: 2022/11/21 14:40:09 by ngjokaj          ###   ########.fr       */
+/*   Created: 2023/01/10 13:33:19 by emetaj            #+#    #+#             */
+/*   Updated: 2023/01/10 13:33:21 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,48 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int c)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (!str)
 		return (0);
 	if (c == '\0')
-		return ((char *)&s[ft_str_len(s)]);
-	while (s[i] != '\0')
+		return ((char *)&str[ft_strlen(str)]);
+	while (str[i] != '\0')
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+		if (str[i] == (char)c)
+			return ((char *)&str[i]);
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *str1, char *str2)
 {
 	char	*str;
 	size_t	i;
 	size_t	c;
 
-	if (!s1)
+	if (!str1)
 	{
-		s1 = (char *)malloc(1 * sizeof(char));
-		s1[0] = '\0';
+		str1 = malloc(1 * sizeof(char));
+		str1[0] = '\0';
 	}
-	if (!s1 || !s2)
-		return (NULL);
-	str = malloc((ft_str_len(s1) + ft_str_len(s2) + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
+	if (!str1 || !str2)
+		return (0);
+	str = malloc((ft_strlen(str1) + ft_strlen(str2) + 1) * sizeof(char));
+	if (str == 0)
+		return (0);
 	i = -1;
 	c = 0;
-	if (s1)
-		while (s1[++i] != '\0')
-			str[i] = s1[i];
-	while (s2[c] != '\0')
-		str[i++] = s2[c++];
-	str[ft_str_len(s1) + ft_str_len(s2)] = '\0';
-	free(s1);
+	if (str1)
+		while (str1[++i] != '\0')
+			str[i] = str1[i];
+	while (str2[c] != '\0')
+		str[i++] = str2[c++];
+	str[ft_strlen(str1) + ft_strlen(str2)] = '\0';
+	free(str1);
 	return (str);
 }
