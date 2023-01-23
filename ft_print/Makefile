@@ -1,34 +1,25 @@
 NAME = libftprintf.a
 
-SRCS = \
-	ft_print.c \
-	src/base.c \
-	src/iscors.c \
-	src/ishex.c \
-	src/isintp.c \
-	src/utils.c \
+SRCS =	ft_printf.c ft_print.c
 
-OBJS = ${SRCS:.c=.o}
+CC = gcc
 
-OBJSBONUS = ${BONUS:.c=.o}
+OBJS = $(SRCS:.c=.o)
 
-CC	= gcc
-RM	= rm -f
+CFLAGS = -Wall -Werror -Wextra
 
-CFLAGS = -Wall -Wextra -Werror
+$(NAME): ft_printf.h
+	$(CC) $(CFLAGS) -c $(SRCS)
+	ar rc $(NAME) $(OBJS)
 
-.c.o:
-	${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
-
-$(NAME): ${OBJS}
-		ar rcs ${NAME} ${OBJS}
-
-all:	${NAME}
+all: $(NAME)
 
 clean:
-		${RM} ${OBJS} ${OBJSBONUS}
+	rm -rf $(OBJS)
 
 fclean: clean
-		${RM} ${NAME}
+	rm -rf $(NAME)
 
 re: fclean all
+
+.PHONY: clean fclean re all

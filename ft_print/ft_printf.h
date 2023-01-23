@@ -6,7 +6,7 @@
 /*   By: emetaj <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:01:24 by emetaj            #+#    #+#             */
-/*   Updated: 2022/12/20 17:11:45 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:33:44 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,14 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_print
-{
-	va_list args;
-	int		len;
-}			t_print;
-
-void	ft_putbase10(unsigned int i, t_print *tab);
-void	ft_puthexmin(unsigned int i, t_print *tab);
-void	ft_puthexmaj(unsigned int i, t_print *tab);
-void	ft_putpnt(unsigned long int i, t_print *tab);
-
-int	ft_printf(const char *input, ...);
-void	ispointer(t_print *tab);
-void	ishexmin(t_print *tab);
-void	ishexmaj(t_print *tab);
-void	ischar(t_print *tab);
-void	isint(t_print *tab);
-
-void	isstring(t_print *tab);
-char	*ft_strchr(const char *string, int searchedChar);
-
-void	ft_putchar(char c);
-void	ft_putnbr(long int nb);
-void	ft_putstr(char *str);
-void 	isdecint(t_print *tab);
-void	isperc(t_print *tab);
-
-size_t	ft_strlen(const char *theString);
-
-char	*ft_strchr(const char *string, int searchedChar );
-
+int	print_c(char c);
+int	ft_printer(char conv, va_list *va);
+int	ft_printf(const char *format, ...);
+int	print_p(unsigned long int n);
+int	print_n(int n);
+int	print_n2(unsigned int n);
+int	print_h(unsigned int n, char h);
+int	print_s(char	*s);
 #endif
