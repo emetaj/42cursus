@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emetaj <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: emetaj <emetaj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:36:59 by emetaj            #+#    #+#             */
-/*   Updated: 2023/01/14 13:33:20 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/01/27 19:48:42 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	counter(unsigned long int n)
+int counter(unsigned long int n)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (n != 0)
@@ -25,7 +25,7 @@ int	counter(unsigned long int n)
 	return (i);
 }
 
-void	put_print_p(unsigned long int n)
+void put_print_p(unsigned long int n)
 {
 	if (n >= 16)
 	{
@@ -41,9 +41,9 @@ void	put_print_p(unsigned long int n)
 	}
 }
 
-int	print_p(unsigned long int n)
+int print_p(unsigned long int n)
 {
-	int	ret;
+	int ret;
 
 	ret = 0;
 	if (n == 0)
@@ -59,9 +59,9 @@ int	print_p(unsigned long int n)
 	return (ret);
 }
 
-int	print_h(unsigned int n, char h)
+int print_h(unsigned int n, char h)
 {
-	int	ret;
+	int ret;
 
 	ret = 0;
 	if (n >= 16)
@@ -84,10 +84,10 @@ int	print_h(unsigned int n, char h)
 	return (ret);
 }
 
-int	print_s(char	*s)
+int print_s(char *s)
 {
-	int	ret;
-	int	i;
+	int ret;
+	int i;
 
 	ret = 0;
 	i = 0;

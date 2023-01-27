@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emetaj <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: emetaj <emetaj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:29:13 by emetaj            #+#    #+#             */
-/*   Updated: 2023/01/14 13:37:12 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/01/27 19:46:08 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	print_n2(unsigned int n)
 	return (ret);
 }
 
-int	ft_printer(char conv, va_list *va)
+int	ft_controller(char conv, va_list *va)
 {
 	int	ret;
 
@@ -90,38 +90,56 @@ int	ft_printf(const char *format, ...)
 		if (format [i] == '%')
 		{
 			i++;
-			ret += ft_printer(format[i], &va);
+			ret += ft_controller(format[i], &va);
 		}
 		i++;
 	}
 	va_end(va);
 	return (ret);
 }
-
-//int main(void)
-//{
-//	#include <limits.h>
-// 	#include <stdio.h>
+//#include <limits.h>
+//#include <stdio.h>
 //
-//    int    i0 = 2147483647;
-//    int    i1 = 2147483647;
-//    int    i2 = -42967295;
-//    char str[] = "lemts go:      ";
-//    ft_printf("f %s %% %d %i %u \n", str, i0, i2, i3);
-//    ft_printf("%u\n", 9223372036854775806LL);
-//    ft_printf(" %i\n", ft_printf(" %u %u %u %u %u %u %u", 
-//	INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, -1, -42));
-//    printf(" %i\n", printf(" %u %u %u %u %u %u %u", INT_MAX, 
-//	INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, -1, -42));
+//int main() {
+//    char c = 'A';
+//    int d = 123;
+//    unsigned int u = 456;
+//    char *s = "string";
+//    void *p = &d;
 //
-//    ft_printf("%u\n", ULONG_MAX);
-//    printf("%i\n", ft_printf("%x", 189));
-//    ft_printf("\n");
-//    printf("%i", printf("%x\n", 189));
-//    printf("%lu %lld %lld %lld %d \n", ULONG_MAX, LONG_MAX , 
-// 	LONG_MIN, ULONG_MAX - 199, -1);
-//    ft_printf(" %i\n", ft_printf("%p %p %p %p %p",ULONG_MAX - 
-// 	0, LONG_MAX - 1, LONG_MIN + 1, ULONG_MAX - 200, -1));
-//    printf(" %i\n", printf("%p %p %p %p %p",ULONG_MAX - 
-//	0, LONG_MAX - 1, LONG_MIN + 1, ULONG_MAX - 200, -1)); 
+//    ft_printf("Test 1: char: %c\n", c);
+//	printf("Comparison: %c\n", c);
+//	printf("\n");
+//    ft_printf("Test 2: %%: %%%%\n");
+//	printf("Comparison: %%%%\n");
+//	printf("\n");
+//    ft_printf("Test 3: int: %d\n", d);
+//	printf("Comparison: %d\n", d);
+//	printf("\n");
+//    ft_printf("Test 4 : int: %i\n", d);
+//	printf("Comparison: %i\n", d);
+//	printf("\n");
+//    ft_printf("Test 5: unsigned int: %u\n", u);
+//	printf("Comparison: %u\n", u);
+//	printf("\n");
+//    ft_printf("Test 6: hex lowercase: %x\n", d);
+//	printf("Comparison: %x\n", d);
+//	printf("\n");
+//    ft_printf("Test 7: hex uppercase: %X\n", d);
+//	printf("Comparison: %X\n", d);
+//	printf("\n");
+//    ft_printf("Test 8: pointer: %p\n", p);
+//	printf("Comparison: %p\n", p);
+//	printf("\n");
+//    ft_printf("Test 9: string: %s\n", s);
+//	printf("Comparison: %s\n", s);
+//	printf("\n");
+//    ft_printf("Test 10: max int: %d\n", INT_MAX);
+//	printf("Comparison: %d\n", INT_MAX);
+//	printf("\n");
+//    ft_printf("Test 11: min int: %d\n", INT_MIN);
+//	printf("Comparison: %d\n", INT_MIN);
+//
+//    return (0);
 //}
+//
