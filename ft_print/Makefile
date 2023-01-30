@@ -1,6 +1,6 @@
 #  |  |  ___ \    \  |         |
-#  |  |     ) |  |\/ |   _  |  |  /   _ 
-# ___ __|  __/   |   |  (   |    <    __/ 
+#  |  |     ) |  |\/ |   _  |  |  /   _
+# ___ __|  __/   |   |  (   |    <    __/
 #    _|  _____| _|  _| \__,_| _|\_\ \___|
 #                              by jcluzet
 ################################################################################
@@ -9,14 +9,14 @@
 
 NAME        := libftprintf.a
 CC        := cc
-FLAGS    := -Wall -Wextra -Werror 
+FLAGS    := -Wall -Wextra -Werror
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
 SRCS        :=      ft_printf.c \
                           ft_print.c \
-                          
+
 OBJS        := $(SRCS:.c=.o)
 
 .c.o:
@@ -37,15 +37,14 @@ RM		    := rm -f
 
 ${NAME}:	${OBJS}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			${CC} ${FLAGS} -o ${NAME} ${OBJS}
+			ar crs $(NAME) $(OBJS)
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 all:		${NAME}
 
-bonus:		all
-
 clean:
-			@ ${RM} *.o */*.o */*/*.o
+			@ ${RM} $(OBJS)
+			@ ${RM} ./a.out
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
 fclean:		clean

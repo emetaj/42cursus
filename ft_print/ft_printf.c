@@ -6,19 +6,19 @@
 /*   By: emetaj <emetaj@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:29:13 by emetaj            #+#    #+#             */
-/*   Updated: 2023/01/27 19:46:08 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/01/30 13:42:32 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_c(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	print_n(int n)
+int	print_int(int n)
 {
 	int	ret;
 
@@ -29,21 +29,21 @@ int	print_n(int n)
 		write(1, "-", 1);
 		n *= -1;
 	}
-	return (print_n2(n) + ret);
+	return (print_uint(n) + ret);
 }
 
-int	print_n2(unsigned int n)
+int	print_uint(unsigned int n)
 {
 	int	ret;
 
 	ret = 0;
 	if (n >= 10)
 	{
-		ret += print_n2(n / 10);
-		ret += print_n2(n % 10);
+		ret += print_uint(n / 10);
+		ret += print_uint(n % 10);
 	}
 	if (n < 10)
-		ret += print_c(n + '0');
+		ret += ft_putchar(n + '0');
 	return (ret);
 }
 
@@ -53,18 +53,18 @@ int	ft_controller(char conv, va_list *va)
 
 	ret = 0;
 	if (conv == 'c')
-		ret += print_c(va_arg(*va, int));
+		ret += ft_putchar(va_arg(*va, int));
 	if (conv == '%')
-		ret += write(1, "%", 1);
+		ret += ft_putchar("%");
 	if (conv == 'd' || conv == 'i')
-		ret += print_n(va_arg(*va, int));
+		ret += print_int(va_arg(*va, int));
 	if (conv == 'u')
-		ret += print_n2(va_arg(*va, unsigned int));
+		ret += print_utint(va_arg(*va, unsigned int));
 	if (conv == 'x' || conv == 'X')
-		ret += print_h(va_arg(*va, unsigned int), conv);
+		ret += print_hex(va_arg(*va, unsigned int), conv);
 	if (conv == 'p')
 	{
-		ret += print_p(va_arg(*va, unsigned long int));
+		ret += print_ptr(va_arg(*va, unsigned long int));
 	}
 	if (conv == 's')
 		ret += print_s(va_arg(*va, char *));
@@ -97,49 +97,53 @@ int	ft_printf(const char *format, ...)
 	va_end(va);
 	return (ret);
 }
-//#include <limits.h>
-//#include <stdio.h>
-//
-//int main() {
-//    char c = 'A';
-//    int d = 123;
-//    unsigned int u = 456;
-//    char *s = "string";
-//    void *p = &d;
-//
-//    ft_printf("Test 1: char: %c\n", c);
-//	printf("Comparison: %c\n", c);
-//	printf("\n");
-//    ft_printf("Test 2: %%: %%%%\n");
-//	printf("Comparison: %%%%\n");
-//	printf("\n");
-//    ft_printf("Test 3: int: %d\n", d);
-//	printf("Comparison: %d\n", d);
-//	printf("\n");
-//    ft_printf("Test 4 : int: %i\n", d);
-//	printf("Comparison: %i\n", d);
-//	printf("\n");
-//    ft_printf("Test 5: unsigned int: %u\n", u);
-//	printf("Comparison: %u\n", u);
-//	printf("\n");
-//    ft_printf("Test 6: hex lowercase: %x\n", d);
-//	printf("Comparison: %x\n", d);
-//	printf("\n");
-//    ft_printf("Test 7: hex uppercase: %X\n", d);
-//	printf("Comparison: %X\n", d);
-//	printf("\n");
-//    ft_printf("Test 8: pointer: %p\n", p);
-//	printf("Comparison: %p\n", p);
-//	printf("\n");
-//    ft_printf("Test 9: string: %s\n", s);
-//	printf("Comparison: %s\n", s);
-//	printf("\n");
-//    ft_printf("Test 10: max int: %d\n", INT_MAX);
-//	printf("Comparison: %d\n", INT_MAX);
-//	printf("\n");
-//    ft_printf("Test 11: min int: %d\n", INT_MIN);
-//	printf("Comparison: %d\n", INT_MIN);
-//
-//    return (0);
-//}
-//
+
+#include <limits.h>
+#include <stdio.h>
+#include "ft_printf.h"
+
+int main() {
+    char c = 'A';
+    int d = 123;
+    unsigned int u = 456;
+    char *s = "string";
+    void *p = &d;
+
+    ft_printf("Test 1: char: %c\n", c);
+	printf("   %i   " , printf("Comparison: %c\n", c));
+	printf("\n");
+
+
+   /* ft_printf("Test 2: %%: %%%%\n");
+	printf("Comparison: %%%%\n");
+	printf("\n");
+    ft_printf("Test 3: int: %d\n", d);
+	printf("Comparison: %d\n", d);
+	printf("\n");
+    ft_printf("Test 4 : int: %i\n", d);
+	printf("Comparison: %i\n", d);
+	printf("\n");
+    ft_printf("Test 5: unsigned int: %u\n", u);
+	printf("Comparison: %u\n", u);
+	printf("\n");
+    ft_printf("Test 6: hex lowercase: %x\n", d);
+	printf("Comparison: %x\n", d);
+	printf("\n");
+    ft_printf("Test 7: hex uppercase: %X\n", d);
+	printf("Comparison: %X\n", d);
+	printf("\n");
+    ft_printf("Test 8: pointer: %p\n", p);
+	printf("Comparison: %p\n", p);
+	printf("\n");
+    ft_printf("Test 9: string: %s\n", s);
+	printf("Comparison: %s\n", s);
+	printf("\n");
+    ft_printf("Test 10: max int: %d\n", INT_MAX);
+	printf("Comparison: %d\n", INT_MAX);
+	printf("\n");
+    ft_printf("Test 11: min int: %d\n", INT_MIN);
+	printf("Comparison: %d\n", INT_MIN);*/
+
+    return (0);
+}
+
