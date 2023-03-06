@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emetaj <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:56:56 by emetaj            #+#    #+#             */
-/*   Updated: 2023/02/06 10:56:57 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/03/06 13:56:38 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	error(int pid, char *str)
 {
 	if (str)
 		free(str);
-	ft_putstr_color_fd(ANSI_COLOR_RED,
-		"server: unexpected error.\n", 2);
+	ft_putstr_fd("server: unexpected error.\n", 2);
 	kill(pid, SIGUSR2);
 	exit(EXIT_FAILURE);
 }
@@ -41,7 +40,7 @@ char	*print_string(char *message)
 }
 
 /*
-** This function is called every time server receives a signal - SIGUSR1 or 
+** This function is called every time server receives a signal - SIGUSR1 or
 ** SIGUSR2 from client.
 ** SIGUSR1 represents a 0; SIGUSR2 represents 1. By getting these signals from
 ** client server is able to recreate the string - receiving it bit-by-bit -
@@ -54,7 +53,7 @@ char	*print_string(char *message)
 ** @line		- Once 8 signals are received - handler_sigusr() is
 ** 				called 8 times or bits == 8 - then the character is complete and
 ** 				is then added to another static variable type char * - 'message'
-** 				
+**
 ** @line		- if the received character represents the null character, then
 ** 				nothing more is added to 'message' and the function
 ** 				print_string() is called to print the message, that is then set
@@ -82,7 +81,7 @@ void	handler_sigusr(int signum, siginfo_t *info, void *context)
 	if (++bits == 8)
 	{
 		if (c)
-			message = ft_straddc(message, c);
+			message = ft_strdup(message);
 		else
 			message = print_string(message);
 		bits = 0;
@@ -121,8 +120,7 @@ int	main(void)
 	sa_signal.sa_sigaction = handler_sigusr;
 	sigaction(SIGUSR1, &sa_signal, NULL);
 	sigaction(SIGUSR2, &sa_signal, NULL);
-	ft_putstr_color_fd(ANSI_COLOR_GREEN,
-		"PID: ", 1);
+	ft_putstr_fd("PID: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putstr_fd("\n", 1);
 	while (1)
