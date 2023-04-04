@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 13:22:55 by emetaj            #+#    #+#             */
-/*   Updated: 2023/03/06 13:22:58 by emetaj           ###   ########.fr       */
+/*   Created: 2023/02/20 10:06:12 by emetaj            #+#    #+#             */
+/*   Updated: 2023/04/04 16:09:46 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_main
 t_main				*main_init(char *path);
 char				**map_init(char *path, t_main *main);
 void				ft_map_check(t_main *main);
-void				draw_map(t_main *main);
+void				ft_map_check2(t_main *main);
 void				xpm_to_img(t_main *main);
 int					key_event(int key, t_main *main);
 int					render(t_main *main);

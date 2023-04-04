@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 13:23:22 by emetaj            #+#    #+#             */
+/*   Created: 2023/02/20 09:43:56 by emetaj            #+#    #+#             */
 /*   Updated: 2023/03/06 13:23:22 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -97,7 +97,7 @@ int	main(int argc, char **argv)
 	check_files();
 	main = main_init(argv[1]);
 	ft_map_check(main);
-	draw_map(main);
+	ft_map_check2(main);
 	mlx_hook(main->win, 2, 1, key_event, main);
 	mlx_hook(main->win, 17, 0, ft_destroy, main);
 	mlx_loop_hook(main->mlx, render, main);

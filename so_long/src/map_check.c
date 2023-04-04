@@ -5,85 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 13:23:27 by emetaj            #+#    #+#             */
-/*   Updated: 2023/03/06 13:23:28 by emetaj           ###   ########.fr       */
+/*   Created: 2023/02/21 13:23:27 by emetaj            #+#    #+#             */
+/*   Updated: 2023/04/04 17:08:59 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	ft_floodfill(t_main *main, int x, int y, int *count_c)
+void	ft_check_coin(t_main *main)
 {
-	if (x <= 0 || x >= main->map->x || y <= 0 || y >= main->map->y
-		|| main->map->map[y][x] == '1' || main->map->map[y][x] == 'c'
-		|| main->map->map[y][x] == 'o' || main->map->map[y][x] == 'e'
-		|| main->map->map[y][x] == 'E' || main->map->map[y][x] == 'X')
-	{
-		if (main->map->map[y][x] == 'E')
-			main->exitflag = 1;
-		return ;
-	}
-	if (main->map->map[y][x] == 'C')
-	{
-		(*count_c)--;
-		main->map->map[y][x] = 'c';
-	}
-	else if (main->map->map[y][x] == '0')
-		main->map->map[y][x] = 'o';
-	ft_floodfill(main, x, (y + 1), count_c);
-	ft_floodfill(main, x, (y - 1), count_c);
-	ft_floodfill(main, (x + 1), y, count_c);
-	ft_floodfill(main, (x - 1), y, count_c);
-}
+	int	i;
+	int	j;
 
-static void	ft_restore(t_main *main)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (y < main->map->y)
+	i = 0;
+	while (i < main->map->y)
 	{
-		x = 0;
-		while (x < main->map->x)
+		j = 0;
+		while (j < main->map->x)
 		{
-			if (main->map->map[y][x] == 'c')
-				main->map->map[y][x] = 'C';
-			else if (main->map->map[y][x] == 'e')
-				main->map->map[y][x] = 'E';
-			else if (main->map->map[y][x] == 'o')
-				main->map->map[y][x] = '0';
-			x++;
+			if (main->map->map[i][j] == 'C')
+			{
+				if (main->map->map[i][j + 1] == '1' &&
+						main->map->map[i][j - 1] == '1'
+						&& main->map->map[i + 1][j] == '1'
+						&& main->map->map[i - 1][j] == '1')
+					ft_error("Error\nCoin is blocked by a wall", main);
+			}
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
-static void	ft_check_valid_map_path(t_main *main)
+void	ft_check_other_char(t_main *main)
 {
-	int	count_c;
+	int	i;
+	int	j;
 
-	count_c = main->coincount;
-	ft_floodfill(main, main->p_x, main->p_y, &count_c);
-	if (count_c != 0)
-		ft_error("Error\nNo valid Path, access to Coin is blocked", main);
-	ft_restore(main);
-	if (main->exitflag == 0)
-		ft_error("Error\nNo valid Path, access to Exit is blocked", main);
-	return ;
+	i = 0;
+	while (i < main->map->y)
+	{
+		j = 0;
+		while (j < main->map->x)
+		{
+			if (main->map->map[i][j] != '1' && main->map->map[i][j] != '0'
+				&& main->map->map[i][j] != 'C' && main->map->map[i][j] != 'E'
+				&& main->map->map[i][j] != 'P')
+				ft_error("Error\nInvalid character in map", main);
+			j++;
+		}
+		i++;
+	}
 }
 
-void	ft_map_check(t_main *main)
+void	ft_check_border(t_main *main)
 {
 	int	i;
 
-	if (main->exitcount < 1)
-		ft_error("Error\nExit not found", main);
-	else if (main->coincount < 1)
-		ft_error("Error\nCoin not found", main);
-	else if (main->playercount < 1 || main->playercount > 1)
-		ft_error("Error\nPlayer not found or more than one", main);
 	i = -1;
 	while (++i < main->map->y - 1)
 	{
@@ -100,5 +78,17 @@ void	ft_map_check(t_main *main)
 		if (main->map->map[main->map->y - 1][i] != '1')
 			ft_error("Error\nMAP: (DOWN) border of wall", main);
 	}
-	ft_check_valid_map_path(main);
+}
+
+void	ft_map_check(t_main *main)
+{
+	if (main->exitcount < 1 || main->exitcount > 1)
+		ft_error("Error\nExit not found or more than one", main);
+	else if (main->coincount < 1)
+		ft_error("Error\nCoin not found", main);
+	else if (main->playercount < 1 || main->playercount > 1)
+		ft_error("Error\nPlayer not found or more than one", main);
+	ft_check_other_char(main);
+	ft_check_coin(main);
+	ft_check_border(main);
 }

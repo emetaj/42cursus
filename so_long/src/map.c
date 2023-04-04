@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 13:23:34 by emetaj            #+#    #+#             */
+/*   Created: 2023/02/21 17:14:11 by emetaj            #+#    #+#             */
 /*   Updated: 2023/03/06 13:23:34 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -66,8 +66,6 @@ static void	map_split(char *buffer, t_main *main)
 	main->map->x = width;
 	main->map->y = height;
 }
-
-
 
 char	**map_init(char *path, t_main *main)
 {

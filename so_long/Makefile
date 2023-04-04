@@ -6,7 +6,7 @@
 #    By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 13:23:45 by emetaj            #+#    #+#              #
-#    Updated: 2023/03/06 13:23:47 by emetaj           ###   ########.fr        #
+#    Updated: 2023/04/03 09:48:17 by emetaj           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ endif
 
 NAME = so_long
 CC = cc
-SRC = src/main.c src/map.c src/draw.c src/render.c src/libft_utils.c \
-	src/map_check.c $(EVENT)
+SRC = src/main.c src/map.c src/render.c src/libft_utils.c \
+	src/map_check.c src/map_check2.c $(EVENT)
 OBJ = $(SRC:%.c=%.o)
 CFLAGS = -Wall -Wextra -Werror
 
