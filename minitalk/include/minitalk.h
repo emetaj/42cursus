@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emetaj <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 10:57:20 by emetaj            #+#    #+#             */
-/*   Updated: 2023/02/06 10:57:22 by emetaj           ###   ########.fr       */
+/*   Created: 2023/04/08 20:21:07 by emetaj            #+#    #+#             */
+/*   Updated: 2023/04/12 13:06:55 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
+# include "../libft/libft.h"
 # include <signal.h>
-# include "libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-/*
-** Colors
-*/
-# define ANSI_COLOR_RED		"\x1b[31m"
-# define ANSI_COLOR_BLUE	"\x1b[34m"
-# define ANSI_COLOR_GREEN	"\x1b[32m"
-# define ANSI_COLOR_YELLOW	"\x1b[33m"
-# define ANSI_COLOR_RESET	"\x1b[0m"
+typedef struct s_message
+{
+	int				bit;
+	unsigned char	character;
+}				t_message;
 
 #endif

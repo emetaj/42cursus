@@ -6,7 +6,7 @@
 #    By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 13:23:45 by emetaj            #+#    #+#              #
-#    Updated: 2023/04/03 09:48:17 by emetaj           ###   ########.fr        #
+#    Updated: 2023/04/07 15:31:20 by emetaj           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,6 @@ ifeq ($(UNAME_S),Linux)
 	EVENT = src/event_linux.c
 	MLX_LIB = $(MLX)/libmlx.a
 	FLAGS = -lXext -lX11 ./$(MLX)/libmlx.a -I./$(MLX) -L./$(MLX) -lmlx
-endif
-ifeq ($(UNAME_S),Darwin)
-	MLX = minilibx-mac
-	EVENT = src/event_mac.c
-	FLAGS = -framework OpenGL -framework AppKit -I./$(MLX) -L./$(MLX) -lmlx
 endif
 
 NAME = so_long

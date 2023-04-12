@@ -216,7 +216,7 @@ int	main()
   mlx_hook(win3, MotionNotify, PointerMotionMask, mouse_win3, 0);
 
   printf("OK\nNow in Loop. Just play. Esc in 3 to destroy, 1&2 to quit.\n");
-  
+
   mlx_loop(mlx);
 }
 

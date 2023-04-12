@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -71,5 +72,26 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+///////////ft_printf
+int	ft_putchar(char c);
+int	ft_controller(char conv, va_list *arg_list);
+int	ft_printf(const char *format, ...);
+int	print_ptr(unsigned long int n);
+int	print_int(int n);
+int	print_uint(unsigned int n);
+int	print_hex(unsigned int n, char h);
+int	print_s(char	*s);
+///////////get_next_line
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4000
+
+#endif
+
+
+char	*get_next_line(int fd);
+char	*ft_read_save(int fd, char *save);
+char	*ft_save(char *save);
+char	*ft_get_line(char *save);
 
 #endif

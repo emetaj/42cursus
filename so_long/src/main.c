@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+#include <stdio.h>
 
 void	ft_error(char *errorcode, t_main *main)
 {
@@ -58,6 +59,7 @@ t_main	*main_init(char *path)
 	main->img = ft_calloc(1, sizeof(t_img));
 	main->coincount = 0;
 	main->movecount = 0;
+	write(1, "check done", 10);
 	main->map->map = map_init(path, main);
 	main->mlx = mlx_init();
 	if (main->mlx == NULL)
@@ -88,8 +90,10 @@ int	main(int argc, char **argv)
 {
 	t_main		*main;
 
+	printf("%d\n", ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4));
+	printf("%s\n", argv[1] + ft_strlen(argv[1]) - 4);
 	if (argc != 2 || access(argv[1], F_OK | R_OK) == -1
-		|| !ft_strncmp(argv[1] + ft_strlen(argv[1]) - 5, ".ber", 4))
+		|| ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
 	{
 		perror("Error\nUsage: ./so_long maps/map.ber\n wrong map (.ber) file");
 		exit(1);

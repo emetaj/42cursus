@@ -31,7 +31,10 @@ SRC =   ft_atoi.c \
         ft_split.c \
         ft_strtrim.c \
         ft_tolower.c \
-        ft_toupper.c
+        ft_toupper.c \
+        ft_printf.c \
+        ft_print.c \
+        get_next_line.c
 
 NAME = libft.a
 

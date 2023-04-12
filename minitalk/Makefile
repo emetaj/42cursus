@@ -1,74 +1,68 @@
-	# Library Name #
-NAME	=
-CLIENT	=	client
-SERVER	=	server
-	# libft Variables #
-LIBFT		=	./libft/libft.a
-LIBFT_DIR	=	./libft
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/11 15:42:36 by emetaj            #+#    #+#              #
+#    Updated: 2023/04/12 13:30:40 by emetaj           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 
-	# Mandatory Variables #
-SRC_C	=	client.c
-SRC_S	=	server.c
-INC		=	-I. -I$(LIBFT_DIR) -I$(LIBFT_DIR)/stack \
-			-I$(LIBFT_DIR)/get_next_line
+CLIENT_SRCS		=	./src/client.c
 
-	# Compiling Variables #
-CC			=	gcc
-CFLAG		=	-Wall -Wextra -Werror
-RM			=	rm -f
+SERVER_SRCS		= 	./src/server.c
 
-	# Colors #
-GREEN		=	\e[38;5;118m
-YELLOW		=	\e[38;5;226m
-RESET		=	\e[0m
-_SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
-_INFO		=	[$(YELLOW)INFO$(RESET)]
+SRCS			=	$(CLIENT_SRCS) $(SERVER_SRCS)
 
-	# Debugger #
-ifeq ($(DEBUG), 1)
-	D_FLAG	=	-g
-endif
+OBJS			=	$(SRCS:.c=.o)
 
-	# Fsanitize #
-ifeq ($(SANITIZE), 1)
-	D_FLAG	=	-fsanitize=leak -g
-endif
+CLIENT_OBJS		=	$(CLIENT_SRCS:.c=.o)
+
+SERVER_OBJS		=	$(SERVER_SRCS:.c=.o)
+
+CLIENT_NAME		=	client
+
+SERVER_NAME		=	server
+
+LIBFT_NAME		=	libft.a
+
+CC				=	cc
+
+RM				=	rm -f
+
+CFLAGS = -Wall -Wextra -Werror
 
 
-all: $(SERVER) $(CLIENT)
+all:            $(LIBFT_NAME) $(CLIENT_NAME) $(SERVER_NAME)
 
-$(NAME): all
+$(LIBFT_NAME):
+		@echo "compiling libft..."
 
-$(SERVER): $(LIBFT)
-	@ $(CC) $(D_FLAG) $(CFLAG) $(SRC_S) $(LIBFT) $(INC) -o $(SERVER)
-	@printf "$(_SUCCESS) server ready.\n"
+		@$(MAKE) -s all -C ./libft
+		@echo "compiling done"
 
-$(CLIENT): $(LIBFT)
-	@ $(CC) $(D_FLAG) $(CFLAG) $(SRC_C) $(LIBFT) $(INC) -o $(CLIENT)
-	@printf "$(_SUCCESS) client ready.\n"
+$(CLIENT_NAME): $(CLIENT_OBJS)
+		@echo "compiling client..."
+		@$(CC) -o $(CLIENT_NAME) $(CFLAGS) $(CLIENT_OBJS) ./libft/libft.a
+		@echo "compiling done"
 
-
-$(LIBFT):
-	@ $(MAKE) DEBUG=$(DEBUG) -C ./libft
+$(SERVER_NAME): $(SERVER_OBJS)
+		@echo "compiling server..."
+		@$(CC) -o $(SERVER_NAME) $(CFLAGS) $(SERVER_OBJS) ./libft/libft.a
+		@echo "compiling done"
 
 clean:
-	@ $(RM) $(CLIENT) $(SERVER)
-	@printf "$(_INFO) client removed.\n"
-	@printf "$(_INFO) server removed.\n"
+		@$(MAKE) -s clean -C ./libft
+		@$(RM) $(OBJS)
 
-fclean:
-	@ $(MAKE) fclean -C $(LIBFT_DIR)
-	@ $(RM) $(CLIENT) $(SERVER)
-	@printf "$(_INFO) client removed.\n"
-	@printf "$(_INFO) server removed.\n"
+fclean: clean
+		@echo "cleaned all"
+		@$(MAKE) -s fclean -C ./libft
+		@$(RM) $(CLIENT_NAME) $(SERVER_NAME)
 
 re: fclean all
 
-mandatory:	$(CLIENT) $(SERVER)
-bonus:		mandatory
-
-m : mandatory
-b : bonus
-
-.PHONY: all clean fclean re mandatory m bonus b
+.PHONY: all clean fclean re client server
