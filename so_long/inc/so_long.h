@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:06:12 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/04 16:09:46 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:47:43 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ typedef struct s_img
 	void			*pu;
 	void			*pd;
 }					t_img;
-
-//playerright
-//playerleft
-//playerup
-//playerdown
 
 typedef struct s_map
 {

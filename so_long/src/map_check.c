@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:23:27 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/11 17:35:12 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:45:26 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ void	ft_map_check(t_main *main)
 		ft_error("Error\nCoin not found", main);
 	else if (main->playercount < 1 || main->playercount > 1)
 		ft_error("Error\nPlayer not found or more than one", main);
+	ft_check_border(main);
 	ft_check_other_char(main);
 	ft_check_coin(main);
-	ft_check_border(main);
-
 }

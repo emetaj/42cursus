@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:23:27 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/11 17:48:35 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:46:08 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 static void	ft_floodfill(t_main *main, int x, int y, int *count_c)
 {
-	if (x <= 0 || x >= main->map->x || y <= 0 || y >= main->map->y
+	if (x < 0 || x >= main->map->x || y < 0 || y >= main->map->y
 		|| main->map->map[y][x] == '1' || main->map->map[y][x] == 'c'
-		|| main->map->map[y][x] == 'o' || main->map->map[y][x] == 'E'
-		|| main->map->map[y][x] == 'X')
-	{
-		if (main->map->map[y][x] == 'E')
-			main->map->map[y][x] = '0'; // Update value to '0' if 'E' or 'e'
-		if (main->map->map[y][x] == 'E')
-			main->exitflag = 1;
+		|| main->map->map[y][x] == 'o' || main->map->map[y][x] == 'e')
 		return ;
+	if (main->map->map[y][x] == 'E')
+	{
+		if (*count_c == 0)
+		{
+		main->exitflag = 1;
+			return ;
+		}
 	}
 	if (main->map->map[y][x] == 'C')
 	{
@@ -32,10 +33,12 @@ static void	ft_floodfill(t_main *main, int x, int y, int *count_c)
 	}
 	else if (main->map->map[y][x] == '0')
 		main->map->map[y][x] = 'o';
-	ft_floodfill(main, x, (y + 1), count_c);
-	ft_floodfill(main, x, (y - 1), count_c);
-	ft_floodfill(main, (x + 1), y, count_c);
-	ft_floodfill(main, (x - 1), y, count_c);
+	else if (main->map->map[y][x] == 'E')
+		main->map->map[y][x] = 'e';
+	ft_floodfill(main, x, y + 1, count_c);
+	ft_floodfill(main, x, y - 1, count_c);
+	ft_floodfill(main, x + 1, y, count_c);
+	ft_floodfill(main, x - 1, y, count_c);
 }
 
 static void	ft_restore(t_main *main)
@@ -91,5 +94,4 @@ static void	ft_check_valid_map_path(t_main *main)
 void	ft_map_check2(t_main *main)
 {
 	ft_check_valid_map_path(main);
-	//ft_check_coin_path(main);
 }
