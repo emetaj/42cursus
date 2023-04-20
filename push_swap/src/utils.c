@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:12:30 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/20 12:50:33 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/20 13:14:44 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ void	exit_sorted_dup(t_stacks *s, int i)
 
 void	parse_numbers(t_stacks *s)
 {
+	char	**tmp;
 	int		i;
 	int		z;
 
 	z = 0;
-	s->tmp = ft_split(s->join_args, ' ');
+	tmp = ft_split(s->join_args, ' ');
 	i = 0;
-	while (s->tmp[i] != NULL && s->tmp[i][0] != '\0')
+	while (tmp[i] != NULL && tmp[i][0] != '\0')
 	{
-		s->a[z++] = ft_atol(s->tmp[i], s);
-		i++;
+		s->a[z++] = ft_atol(tmp[i++], s);
+		free(tmp[i - 1]);
 	}
+	free(tmp);
 }
 
 void	init_stacks(int argc, char **argv, t_stacks *s)

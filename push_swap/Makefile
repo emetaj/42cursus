@@ -49,7 +49,7 @@ re:	fclean all clean
 
 size ?= 10
 
-CHECKER = valgrind ./push_swap $(ARG) | ./checker_linux $(ARG)
+CHECKER = valgrind --leak-check=full ./push_swap $(ARG) | ./checker_linux $(ARG)
 
 test:
 	@$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
