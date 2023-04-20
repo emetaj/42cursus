@@ -6,36 +6,11 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:23:27 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/13 14:45:26 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/14 12:10:41 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-
-void	ft_check_coin(t_main *main)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < main->map->y)
-	{
-		j = 0;
-		while (j < main->map->x)
-		{
-			if (main->map->map[i][j] == 'C')
-			{
-				if (main->map->map[i][j + 1] == '1' &&
-						main->map->map[i][j - 1] == '1'
-						&& main->map->map[i + 1][j] == '1'
-						&& main->map->map[i - 1][j] == '1')
-					ft_error("Error\nCoin is blocked by a wall", main);
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 void	ft_check_other_char(t_main *main)
 {
@@ -90,5 +65,4 @@ void	ft_map_check(t_main *main)
 		ft_error("Error\nPlayer not found or more than one", main);
 	ft_check_border(main);
 	ft_check_other_char(main);
-	ft_check_coin(main);
 }

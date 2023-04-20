@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:23:27 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/13 15:46:08 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/13 17:52:05 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ static void	ft_floodfill(t_main *main, int x, int y, int *count_c)
 		return ;
 	if (main->map->map[y][x] == 'E')
 	{
-		if (*count_c == 0)
-		{
 		main->exitflag = 1;
+		if (*count_c == 0)
 			return ;
-		}
 	}
 	if (main->map->map[y][x] == 'C')
 	{
@@ -87,7 +85,9 @@ static void	ft_check_valid_map_path(t_main *main)
 	}
 	ft_floodfill(main, main->p_x, main->p_y, &count_c);
 	if (count_c != 0)
-		ft_error("Error : Invalid map path", main);
+		ft_error("Error : Invalid map path, collectibles not reachable", main);
+	if (main->exitflag == 0)
+		ft_error("Error : Invalid map path, exit not reachable", main);
 	ft_restore(main);
 }
 

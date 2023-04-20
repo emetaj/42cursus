@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:26:15 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/13 18:29:00 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/20 12:28:26 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -45,7 +44,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				t_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_itoa(int n);
-char				**ft_split(char const *s, char c);
+int	count_strings(char const *s, char c);
+char				**ft_split(const char *s, char c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -72,24 +72,5 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-///////////ft_printf
-int					ft_putchar(char c);
-int					ft_controller(char conv, va_list *arg_list);
-int					ft_printf(const char *format, ...);
-int					print_ptr(unsigned long int n);
-int					print_int(int n);
-int					print_uint(unsigned int n);
-int					print_hex(unsigned int n, char h);
-int					print_s(char	*s);
-///////////get_next_line
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4000
-# endif
-
-char				*get_next_line(int fd);
-char				*ft_read_save(int fd, char *save);
-char				*ft_save(char *save);
-char				*ft_get_line(char *save);
 
 #endif
