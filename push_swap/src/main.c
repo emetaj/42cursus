@@ -6,11 +6,12 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 11:44:12 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/20 12:47:20 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/26 13:08:49 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+#include <stdio.h>
 
 void	free_errormsg(t_stacks *s, char *msg)
 {

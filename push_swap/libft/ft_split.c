@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:13:42 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/20 12:27:35 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/26 12:41:07 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = -1;
-	wordcount = ft_count_words(s, c);
+	wordcount = count_strings(s, c);
 	parsedwords = (char **)malloc((wordcount + 1) * sizeof(char *));
 	if (!parsedwords)
 		return (NULL);
@@ -65,3 +65,4 @@ char	**ft_split(char const *s, char c)
 	}
 	parsedwords[j] = 0;
 	return (parsedwords);
+}

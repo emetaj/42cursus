@@ -6,11 +6,12 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:12:30 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/20 13:14:44 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/04/26 13:10:08 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+#include <limits.h>
 
 void	exit_sorted_dup(t_stacks *s, int i)
 {
@@ -32,7 +33,7 @@ void	exit_sorted_dup(t_stacks *s, int i)
 		}
 	}
 	if (is_array_sorted(s))
-		free_errormsg(s, NULL);
+		free_errormsg(s, "Error\n");
 }
 
 void	parse_numbers(t_stacks *s)
@@ -101,7 +102,7 @@ void	create_index(t_stacks *s)
 	free(new_a);
 }
 
-int	ft_atol(const char *nptr, t_stacks *s)
+long	ft_atol(const char *nptr, t_stacks *s)
 {
 	int			i;
 	long		sign;
@@ -120,7 +121,7 @@ int	ft_atol(const char *nptr, t_stacks *s)
 	}
 	while (nptr[i])
 	{
-		if (res > 2147483647 || (res * sign) < -2147483648)
+		if (res > 2147483647 || (res * sign) < INT_MIN)
 			free_errormsg(s, "Error\n");
 		if (!(nptr[i] >= '0' && nptr[i] <= '9'))
 			free_errormsg(s, "Error\n");

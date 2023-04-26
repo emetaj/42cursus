@@ -6,118 +6,54 @@
 #    By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 12:28:58 by emetaj            #+#    #+#              #
-#    Updated: 2023/04/20 12:28:59 by emetaj           ###   ########.fr        #
+#    Updated: 2023/04/26 13:02:47 by emetaj           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-LIBFT_DIR = libft
-LIBFT = ./libft/libft.a
-RM = rm -rf
-SRCS = utils.c move.c sort.c main.c
-SRC	= $(addprefix ./src/,$(SRCS))
-OBJ = $(SRC:.c=.o)
+NAME        = libft.a
+SRCS        = ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
+ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
+ft_itoa.c ft_memcpy.c  ft_putendl_fd.c ft_strchr.c  ft_strlcpy.c \
+ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c ft_striteri.c \
+ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
+ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
+ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c
 
-all: $(LIBFT) $(NAME)
-	@echo "Done!"
-	@echo "To test the program, run 'make test' or 'make test size=10'"
-	@echo "for example for testing 10 random numbers"
-	@echo "./push_swap 1 2 3 4 5 6 7 8 9 10"
+SRCS_BONUS = ft_lstmap.c ft_lstnew.c ft_lstiter.c ft_lstlast.c \
+ft_lstsize.c ft_lstclear.c ft_lstdelone.c ft_lstadd_back.c ft_lstadd_front.c
 
-$(LIBFT):
-	@make -s -C $(LIBFT_DIRSRC =   ft_atoi.c \
-        ft_itoa.c \
-        ft_bzero.c \
-        ft_calloc.c \
-        ft_isalnum.c \
-        ft_isalpha.c \
-        ft_isascii.c \
-        ft_isdigit.c \
-        ft_isprint.c \
-        ft_memchr.c \
-        ft_memcmp.c \
-        ft_memcpy.c \
-        ft_memmove.c \
-        ft_memset.c \
-        ft_strchr.c \
-        ft_strncmp.c \
-        ft_strdup.c \
-        ft_substr.c \
-        ft_putendl_fd.c \
-        ft_putnbr_fd.c \
-        ft_striteri.c \
-        ft_strjoin.c \
-        ft_putchar_fd.c \
-        ft_putstr_fd.c \
-        ft_strlcat.c \
-        ft_strlcpy.c \
-        ft_strlen.c \
-        ft_strmapi.c \
-        ft_strnstr.c \
-        ft_strrchr.c \
-        ft_split.c \
-        ft_strtrim.c \
-        ft_tolower.c \
-        ft_toupper.c
+OBJS		= $(SRCS:%.c=%.o)
+OBJS_BONUS	= $(SRCS_BONUS:%.c=%.o)
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g
+RM          = rm -f
+LIBC		= ar rcs
 
-NAME = libft.a
+.PHONY:		all clean fclean re bonus
 
-CFLAGS = -Werror -Wextra -Wall
+all:		$(NAME)
 
-CC = cc
+$(NAME):	$(OBJS)
+			$(LIBC) $(NAME) $(OBJS)
 
-OBJ = $(SRC:.c=.o)
+%.o: %.c
+			$(CC) -c $(CFLAGS) $?
 
+bonus: fclean
+	$(CC) $(CFLAGS) -c $(SRCS) $(SRCS_BONUS)
+	$(LIBC) $(NAME) $(OBJS) $(OBJS_BONUS)
 
-$(NAME):
-		$(CC) -c $(CFLAGS) $(SRC)
-		ar crs $(NAME) $(OBJ)
+$(OBJS_BONUS):	$(SRCS_BONUS)
 
-all: $(NAME)
 
 clean:
-		rm -f $(OBJ)
+			@$(RM) $(OBJS) $(OBJS_BONUS)
 
-fclean: clean
-		rm -f $(NAME)
+fclean:		clean
+			@$(RM) $(NAME)
 
-re: fclean all
-)
+re:			fclean $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L./$(LIBFT_DIR) -lft
-
-$(OBJ): $(SRC)
-	@$(CC) $(CFLAGS) -c $? -I./$(LIBFT_DIR)
-	@mv *.o src
-
-clean:
-	@$(RM) src/*.o
-	@make -s -C $(LIBFT_DIR) clean
-
-fclean:	clean
-	@$(RM) $(NAME)
-	@make -s -C $(LIBFT_DIR) fclean
-
-re:	fclean all clean
-
-.PHONY: all clean fclean test re
-
-OS = $(shell uname)
-
-size ?= 10
-
-ifeq ($(OS),Linux)
-CHECKER = valgrind ./push_swap $(ARG) | ./checker_linux $(ARG)
-else
-CHECKER = ./push_swap $(ARG) | ./checker_Mac $(ARG)
-endif
-
-test:
-	@$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
-	@echo "Checker result: "
-	$(CHECKER)
-	@echo "Instructions count: "
-	@./push_swap $(ARG) | wc -l
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS) $(SRCS_BONUS)
+	$(CC) -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_BONUS)

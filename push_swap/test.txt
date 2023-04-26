@@ -1,0 +1,1 @@
+ARG="2147483649 2147483649 2147483649"; valgrind --leak-check=full --show-leak-kinds=all ./push_swap $ARG | ./checker_linux $ARG
