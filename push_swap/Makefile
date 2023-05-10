@@ -6,7 +6,7 @@
 #    By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 17:14:00 by emetaj            #+#    #+#              #
-#    Updated: 2023/04/26 12:41:54 by emetaj           ###   ########.fr        #
+#    Updated: 2023/05/10 13:21:20 by emetaj           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 LIBFT_DIR = libft
 LIBFT = ./libft/libft.a
 RM = rm -rf
-SRCS = utils.c move.c sort.c main.c
+SRCS = utils.c move.c sort.c main.c utils2.c
 SRC	= $(addprefix ./src/,$(SRCS))
 OBJ = $(SRC:.c=.o)
 

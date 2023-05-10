@@ -6,12 +6,13 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:12:30 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/26 13:10:08 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 13:23:41 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 #include <limits.h>
+#include <stdio.h>
 
 void	exit_sorted_dup(t_stacks *s, int i)
 {
@@ -33,7 +34,21 @@ void	exit_sorted_dup(t_stacks *s, int i)
 		}
 	}
 	if (is_array_sorted(s))
-		free_errormsg(s, "Error\n");
+		free_errormsg(s, "");
+}
+
+void	free_parsedwords(t_stacks *s, char **parsedwords)
+{
+	int	i;
+
+	i = 0;
+	while (parsedwords[i] != NULL)
+	{
+		free(parsedwords[i]);
+		i++;
+	}
+	free(parsedwords);
+	free_errormsg(s, "Error\n");
 }
 
 void	parse_numbers(t_stacks *s)
@@ -45,10 +60,14 @@ void	parse_numbers(t_stacks *s)
 	z = 0;
 	tmp = ft_split(s->join_args, ' ');
 	i = 0;
-	while (tmp[i] != NULL && tmp[i][0] != '\0')
+	while (tmp[i] != NULL)
 	{
-		s->a[z++] = ft_atol(tmp[i++], s);
-		free(tmp[i - 1]);
+		if (tmp[i][0] != '\0')
+		{
+			s->a[z++] = ft_atol(tmp[i], s, tmp);
+		}
+		free(tmp[i]);
+		i++;
 	}
 	free(tmp);
 }
@@ -85,7 +104,7 @@ void	create_index(t_stacks *s)
 
 	new_a = malloc(s->a_size * sizeof * new_a);
 	if (new_a == NULL)
-		free_errormsg(s, "Error\n");
+		free_errormsg(s, "Error \n");
 	i = -1;
 	while (++i < s->a_size)
 	{
@@ -100,32 +119,4 @@ void	create_index(t_stacks *s)
 	while (i--)
 		s->a[i] = new_a[i];
 	free(new_a);
-}
-
-long	ft_atol(const char *nptr, t_stacks *s)
-{
-	int			i;
-	long		sign;
-	long long	res;
-
-	res = 0;
-	sign = 1;
-	i = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
-		i++;
-	if ((nptr[i] == '+' || nptr[i] == '-'))
-	{
-		if (nptr[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (nptr[i])
-	{
-		if (res > 2147483647 || (res * sign) < INT_MIN)
-			free_errormsg(s, "Error\n");
-		if (!(nptr[i] >= '0' && nptr[i] <= '9'))
-			free_errormsg(s, "Error\n");
-		res = res * 10 + (nptr[i++] - '0');
-	}
-	return ((int)(res * sign));
 }

@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 11:44:12 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/26 13:08:49 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 13:49:38 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_errormsg(t_stacks *s, char *msg)
 	}
 	exit(1);
 }
+
 static void	validate_arguments(int argc, char **argv)
 {
 	int	i;
@@ -107,6 +108,6 @@ int	main(int argc, char **argv)
 	else
 		radix_sort(s);
 	exit_sorted_dup(s, 1);
-	free_errormsg(s, "Error\n");
+	free_errormsg(s, "");
 	return (0);
 }

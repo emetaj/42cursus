@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:26:15 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/24 15:35:42 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 13:59:18 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				t_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_itoa(int n);
-int		count_strings(char const *s, char c);
+int					count_strings(char const *s, char c);
 char				**ft_split(const char *s, char c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s1);
