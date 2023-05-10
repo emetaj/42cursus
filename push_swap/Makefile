@@ -6,7 +6,7 @@
 #    By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 17:14:00 by emetaj            #+#    #+#              #
-#    Updated: 2023/05/10 13:21:20 by emetaj           ###   ########.fr        #
+#    Updated: 2023/05/10 16:13:55 by emetaj           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,6 @@ size ?= 10
 
 ifeq ($(OS),Linux)
 CHECKER = valgrind ./push_swap $(ARG) | ./checker_linux $(ARG)
-else
-CHECKER = ./push_swap $(ARG) | ./checker_Mac $(ARG)
 endif
 
 test:

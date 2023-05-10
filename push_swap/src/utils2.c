@@ -6,18 +6,18 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:21:04 by emetaj            #+#    #+#             */
-/*   Updated: 2023/05/10 13:21:46 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:46:31 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-static int	ft_is_space(char c)
+int	ft_is_space(char c)
 {
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }
 
-static long	ft_handle_sign(char *nptr, int *i)
+long	ft_handle_sign(char *nptr, int *i)
 {
 	long	sign;
 

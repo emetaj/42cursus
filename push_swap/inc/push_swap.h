@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 08:31:59 by emetaj            #+#    #+#             */
-/*   Updated: 2023/05/10 13:58:32 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:45:41 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 # define INT_MIN -2147483648
 
 # include "../libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <limits.h>
 
 typedef struct s_stacks
 {

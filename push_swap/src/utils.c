@@ -6,13 +6,11 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:12:30 by emetaj            #+#    #+#             */
-/*   Updated: 2023/05/10 13:23:41 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:41:45 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include <limits.h>
-#include <stdio.h>
 
 void	exit_sorted_dup(t_stacks *s, int i)
 {
@@ -42,7 +40,7 @@ void	free_parsedwords(t_stacks *s, char **parsedwords)
 	int	i;
 
 	i = 0;
-	while (parsedwords[i] != NULL)
+	while (parsedwords[i])
 	{
 		free(parsedwords[i]);
 		i++;
@@ -60,7 +58,7 @@ void	parse_numbers(t_stacks *s)
 	z = 0;
 	tmp = ft_split(s->join_args, ' ');
 	i = 0;
-	while (tmp[i] != NULL)
+	while (tmp[i])
 	{
 		if (tmp[i][0] != '\0')
 		{
@@ -88,10 +86,10 @@ void	init_stacks(int argc, char **argv, t_stacks *s)
 		i++;
 	}
 	s->a = malloc(s->a_size * sizeof * s->a);
-	if (s->a == NULL)
+	if (!s->a)
 		free_errormsg(s, "Error\n");
 	s->b = malloc(s->a_size * sizeof * s->b);
-	if (s->b == NULL)
+	if (!s->b)
 		free_errormsg(s, "Error\n");
 }
 
@@ -103,7 +101,7 @@ void	create_index(t_stacks *s)
 	int		*new_a;
 
 	new_a = malloc(s->a_size * sizeof * new_a);
-	if (new_a == NULL)
+	if (!new_a)
 		free_errormsg(s, "Error \n");
 	i = -1;
 	while (++i < s->a_size)

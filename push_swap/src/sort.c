@@ -6,7 +6,7 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:36:39 by emetaj            #+#    #+#             */
-/*   Updated: 2023/04/26 13:09:57 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:53:21 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	sort_four_to_five_elements(t_stacks *s)
 {
 	while (s->b_size <= 1)
 	{
-		if (s->a[0] == 0 || s->a[0] == 1)
+		if (!s->a[0] || s->a[0] == 1)
 			push("pb", s);
 		else
 			rotate(s->a, s->a_size, "up", "a");
 	}
-	if (s->b[0] == 0)
+	if (!s->b[0])
 		swap("sb", s->b, s->b_size);
 	if (s->a[2] != 4)
 	{
@@ -63,11 +63,11 @@ int	is_array_sorted(t_stacks *s)
 	return (1);
 }
 
-static void	radix_sort_stack_b(t_stacks *s, int b_size, int bit_size, int j)
+void	radix_sort_stack_b(t_stacks *s, int b_size, int bit_size, int j)
 {
 	while (b_size-- && j <= bit_size && !is_array_sorted(s))
 	{
-		if (((s->b[0] >> j) & 1) == 0)
+		if (!((s->b[0] >> j) & 1))
 			rotate(s->b, s->b_size, "up", "b");
 		else
 			push("pa", s);
@@ -93,13 +93,13 @@ void	radix_sort(t_stacks *s)
 		size = s->a_size;
 		while (size-- && !is_array_sorted(s))
 		{
-			if (((s->a[0] >> j) & 1) == 0)
+			if (!((s->a[0] >> j) & 1))
 				push("pb", s);
 			else
 				rotate(s->a, s->a_size, "up", "a");
 		}
 		radix_sort_stack_b(s, s->b_size, bit_size, j + 1);
 	}
-	while (s->b_size != 0)
+	while (s->b_size)
 		push("pa", s);
 }

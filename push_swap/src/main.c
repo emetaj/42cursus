@@ -6,32 +6,31 @@
 /*   By: emetaj <emetaj@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 11:44:12 by emetaj            #+#    #+#             */
-/*   Updated: 2023/05/10 13:49:38 by emetaj           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:01:21 by emetaj           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include <stdio.h>
 
 void	free_errormsg(t_stacks *s, char *msg)
 {
 	if (msg)
 		write(2, msg, ft_strlen(msg));
-	if (s != NULL)
+	if (s)
 	{
-		if (s->a != NULL)
+		if (s->a)
 			free(s->a);
-		if (s->b != NULL)
+		if (s->b)
 			free(s->b);
-		if (s->join_args != NULL)
+		if (s->join_args)
 			free(s->join_args);
-		if (s != NULL)
+		if (s)
 			free(s);
 	}
 	exit(1);
 }
 
-static void	validate_arguments(int argc, char **argv)
+void	validate_arguments(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -58,7 +57,7 @@ static void	validate_arguments(int argc, char **argv)
 	}
 }
 
-static void	join_args(int argc, char **argv, t_stacks *s)
+void	join_args(int argc, char **argv, t_stacks *s)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -66,7 +65,7 @@ static void	join_args(int argc, char **argv, t_stacks *s)
 
 	i = 0;
 	tmp2 = ft_strdup("");
-	while (++i < argc && argv[i] != NULL)
+	while (++i < argc && argv[i])
 	{
 		tmp = ft_strjoin(tmp2, argv[i]);
 		if (tmp2)
@@ -80,7 +79,7 @@ static void	join_args(int argc, char **argv, t_stacks *s)
 		}
 	}
 	s->join_args = ft_strdup(tmp);
-	if (s->join_args == NULL)
+	if (!s->join_args)
 		free_errormsg(s, "Error\n");
 	if (tmp)
 		free(tmp);
@@ -92,7 +91,7 @@ int	main(int argc, char **argv)
 
 	validate_arguments(argc, argv);
 	s = malloc(sizeof * s);
-	if (s == NULL)
+	if (!s)
 		exit(1);
 	init_stacks(argc, argv, s);
 	join_args(argc, argv, s);
